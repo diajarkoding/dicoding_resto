@@ -11,13 +11,13 @@ import '../data/models/detail_resto_model.dart';
 import '../widget/custom_button.dart';
 
 class DetailPage extends StatelessWidget {
+  final String id;
   DetailPage({
+    required this.id,
     Key? key,
   }) : super(key: key);
 
   final restoController = Get.find<RestoController>();
-
-  int index = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -225,11 +225,11 @@ class DetailPage extends StatelessWidget {
       );
     }
 
-    Widget reviewButton() {
+    Widget reviewButton(RestaurantDetail resto) {
       return CustomButton(
         text: 'Tulis Review',
         width: 0.2,
-        onPressed: () => Get.to(() => ReviewPage(), arguments: index),
+        onPressed: () => Get.to(() => ReviewPage(), arguments: resto),
         icon: Icons.reviews,
       );
     }
@@ -274,14 +274,14 @@ class DetailPage extends StatelessWidget {
     }
 
     Widget content(
-      String name,
-      String city,
-      double rating,
-      String text,
-      Menus menus,
-      List<Category> categories,
-      List<CustomerReviewResult> customerReviewResult,
-    ) {
+        String name,
+        String city,
+        double rating,
+        String text,
+        Menus menus,
+        List<Category> categories,
+        List<CustomerReviewResult> customerReviewResult,
+        RestaurantDetail resto) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -309,7 +309,7 @@ class DetailPage extends StatelessWidget {
                 drinks(
                   menus,
                 ),
-                reviewButton(),
+                reviewButton(resto),
                 lineDivider(),
                 reviewResult(customerReviewResult),
               ],
@@ -324,7 +324,7 @@ class DetailPage extends StatelessWidget {
       body: GetBuilder<RestoController>(
         builder: (_) {
           return FutureBuilder<RestaurantDetail>(
-            future: restoController.fetchDetailResto(index),
+            future: restoController.fetchDetailResto(id),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
@@ -340,14 +340,14 @@ class DetailPage extends StatelessWidget {
                       backgroundImage(restaurantDetail.pictureId),
                       customShadow(),
                       content(
-                        restaurantDetail.name,
-                        restaurantDetail.city,
-                        restaurantDetail.rating,
-                        restaurantDetail.description,
-                        restaurantDetail.menus,
-                        restaurantDetail.categories,
-                        restaurantDetail.customerReviews,
-                      ),
+                          restaurantDetail.name,
+                          restaurantDetail.city,
+                          restaurantDetail.rating,
+                          restaurantDetail.description,
+                          restaurantDetail.menus,
+                          restaurantDetail.categories,
+                          restaurantDetail.customerReviews,
+                          restaurantDetail),
                     ],
                   ),
                 );

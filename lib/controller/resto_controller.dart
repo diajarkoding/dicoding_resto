@@ -78,9 +78,9 @@ class RestoController extends GetxController {
     }
   }
 
-  Future<RestaurantDetail> fetchDetailResto(int index) async {
+  Future<RestaurantDetail> fetchDetailResto(String id) async {
     try {
-      RestaurantDetail snapshot = await api.getDetailResto(index);
+      RestaurantDetail snapshot = await api.getDetailResto(id);
 
       return snapshot;
     } catch (e) {
@@ -89,10 +89,8 @@ class RestoController extends GetxController {
     }
   }
 
-  Future<dynamic> addRestaurantReview(int index) async {
+  Future<dynamic> addRestaurantReview(String id) async {
     try {
-      String id = listResto[index].id;
-
       String body = jsonEncode(
         {"id": id, "name": nameCustomer.text, "review": reviewCustomer.text},
       );
@@ -116,13 +114,13 @@ class RestoController extends GetxController {
     Get.to(() => SearchPage());
   }
 
-  Future<void> sendReview(int index) async {
+  Future<void> sendReview(String id) async {
     if (nameCustomer.text.isEmpty) {
       infoMessage('Nama tidak boleh kosong');
     } else if (reviewCustomer.text.isEmpty) {
       infoMessage('Review tidak boleh kosong');
     } else {
-      await addRestaurantReview(index);
+      await addRestaurantReview(id);
 
       nameCustomer.clear();
 

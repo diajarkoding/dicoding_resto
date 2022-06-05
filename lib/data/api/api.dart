@@ -36,10 +36,8 @@ class Api {
     }
   }
 
-  Future<RestaurantDetail> getDetailResto(int index) async {
-    Restaurants data = await getListResto();
-
-    final Uri url = Uri.parse('$baseUrl/detail/${data.restaurants[index].id}');
+  Future<RestaurantDetail> getDetailResto(String id) async {
+    final Uri url = Uri.parse('$baseUrl/detail/$id');
 
     final http.Response response = await http.get(url);
 

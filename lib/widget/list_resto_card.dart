@@ -7,12 +7,10 @@ import '../pages/detail_page.dart';
 
 class ListRestoCard extends StatelessWidget {
   final RestaurantSummary resto;
-  final int index;
 
   const ListRestoCard({
     Key? key,
     required this.resto,
-    required this.index,
   }) : super(key: key);
 
   @override
@@ -20,8 +18,7 @@ class ListRestoCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         Get.to(
-          () => DetailPage(),
-          arguments: index,
+          () => DetailPage(id: resto.id),
         );
       },
       child: Column(

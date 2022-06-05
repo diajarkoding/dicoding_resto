@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:dicoding_resto/controller/resto_controller.dart';
+import 'package:dicoding_resto/data/models/detail_resto_model.dart';
 import 'package:dicoding_resto/utils/theme.dart';
 import 'package:dicoding_resto/widget/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -11,12 +12,10 @@ class ReviewPage extends StatelessWidget {
 
   final restoController = Get.find<RestoController>();
 
-  int index = Get.arguments;
+  RestaurantDetail resto = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
-    var resto = restoController.listResto[index];
-
     Widget header() {
       return Padding(
         padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
@@ -169,7 +168,7 @@ class ReviewPage extends StatelessWidget {
       return CustomButton(
         text: 'Kirim Review',
         width: 0.2,
-        onPressed: () => restoController.sendReview(index),
+        onPressed: () => restoController.sendReview(resto.id),
         icon: Icons.send,
       );
     }

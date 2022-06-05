@@ -151,7 +151,6 @@ class SearchPage extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return SearchRestoCard(
                           resto: restoController.searchListResto[index],
-                          index: index,
                         );
                       },
                     );

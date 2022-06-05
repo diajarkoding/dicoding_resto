@@ -6,12 +6,10 @@ import '../pages/detail_page.dart';
 
 class SearchRestoCard extends StatelessWidget {
   final SearchRestoModel resto;
-  final int index;
 
   const SearchRestoCard({
     Key? key,
     required this.resto,
-    required this.index,
   }) : super(key: key);
 
   @override
@@ -19,8 +17,7 @@ class SearchRestoCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         Get.to(
-          () => DetailPage(),
-          arguments: index,
+          () => DetailPage(id: resto.id),
         );
       },
       child: Column(
