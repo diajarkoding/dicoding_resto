@@ -1,8 +1,9 @@
 import 'package:dicoding_resto/controller/resto_controller.dart';
 import 'package:dicoding_resto/widget/list_resto_card.dart';
-import 'package:dicoding_resto/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../helper/utils/constans/theme.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);

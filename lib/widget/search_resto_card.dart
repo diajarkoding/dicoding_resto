@@ -1,7 +1,7 @@
 import 'package:dicoding_resto/data/models/search_resto_model.dart';
-import 'package:dicoding_resto/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../helper/utils/constans/theme.dart';
 import '../pages/detail_page.dart';
 
 class SearchRestoCard extends StatelessWidget {

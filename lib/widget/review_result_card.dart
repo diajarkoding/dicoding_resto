@@ -1,6 +1,7 @@
-import 'package:dicoding_resto/utils/capitalize.dart';
+import 'package:dicoding_resto/helper/utils/capitalize.dart';
 import 'package:flutter/material.dart';
-import '../utils/theme.dart';
+
+import '../helper/utils/constans/theme.dart';
 
 class ReviewResultCard extends StatelessWidget {
   final String review;
