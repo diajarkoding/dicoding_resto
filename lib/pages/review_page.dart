@@ -1,5 +1,3 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:dicoding_resto/controller/resto_controller.dart';
 import 'package:dicoding_resto/data/models/detail_resto_model.dart';
 import 'package:dicoding_resto/utils/theme.dart';
@@ -12,7 +10,7 @@ class ReviewPage extends StatelessWidget {
 
   final restoController = Get.find<RestoController>();
 
-  RestaurantDetail resto = Get.arguments;
+  final RestaurantDetail resto = Get.arguments;
 
   @override
   Widget build(BuildContext context) {

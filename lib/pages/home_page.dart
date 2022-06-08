@@ -121,7 +121,6 @@ class HomePage extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return ListRestoCard(
                           resto: restoController.listResto[index],
-                          // index: index,
                         );
                       },
                     );

@@ -1,14 +1,12 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
 
 class CustomButton extends StatelessWidget {
-  String text;
-  double width;
-  Function() onPressed;
-  IconData icon;
-  CustomButton(
+  final String text;
+  final double width;
+  final Function() onPressed;
+  final IconData icon;
+  const CustomButton(
       {required this.text,
       required this.width,
       required this.onPressed,
