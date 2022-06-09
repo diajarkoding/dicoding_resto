@@ -1,10 +1,9 @@
 import 'package:dicoding_resto/controller/resto_controller.dart';
 import 'package:dicoding_resto/data/models/detail_resto_model.dart';
+import 'package:dicoding_resto/utils/theme.dart';
 import 'package:dicoding_resto/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../helper/utils/constans/theme.dart';
 
 class ReviewPage extends StatelessWidget {
   ReviewPage({Key? key}) : super(key: key);

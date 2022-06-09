@@ -1,8 +1,8 @@
+import 'package:dicoding_resto/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../data/models/resto_model.dart';
-import '../helper/utils/constans/theme.dart';
 import '../pages/detail_page.dart';
 
 class ListRestoCard extends StatelessWidget {
