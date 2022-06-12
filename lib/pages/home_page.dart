@@ -2,8 +2,8 @@ import 'package:dicoding_resto/controller/resto_controller.dart';
 import 'package:dicoding_resto/widget/list_resto_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../helper/utils/constans/theme.dart';
+import '../helper/constans/theme.dart';
+import '../widget/custom_bottom_navbar.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -132,12 +132,14 @@ class HomePage extends StatelessWidget {
     }
 
     return Scaffold(
+      backgroundColor: whiteColor,
       body: ListView(
         children: [
           header(),
           gridViewResto(),
         ],
       ),
+      bottomNavigationBar: CustomBottomNavBarItem(),
     );
   }
 }

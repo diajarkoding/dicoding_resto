@@ -1,13 +1,13 @@
-// ignore_for_file: must_be_immutable
+import 'package:dicoding_resto/controller/favorite_controller.dart';
 import 'package:dicoding_resto/controller/resto_controller.dart';
-import 'package:dicoding_resto/pages/review_page.dart';
+import 'package:dicoding_resto/helper/routes/route_name.dart';
 import 'package:dicoding_resto/widget/category_card.dart';
 import 'package:dicoding_resto/widget/menus_widget.dart';
 import 'package:dicoding_resto/widget/review_result_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../data/models/detail_resto_model.dart';
-import '../helper/utils/constans/theme.dart';
+import '../helper/constans/theme.dart';
 import '../widget/custom_button.dart';
 
 class DetailPage extends StatelessWidget {
@@ -18,6 +18,7 @@ class DetailPage extends StatelessWidget {
   }) : super(key: key);
 
   final restoController = Get.find<RestoController>();
+  final favoriteController = Get.put(FavoriteController());
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class DetailPage extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
               image: NetworkImage(
-                'https://restaurant-api.dicoding.dev/images/medium/$id',
+                '$imageUrl$id',
               ),
               fit: BoxFit.cover),
         ),
@@ -55,11 +56,36 @@ class DetailPage extends StatelessWidget {
       );
     }
 
+    Widget favoriteButton(RestaurantDetail resto) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: defaultMargin,
+          vertical: 40,
+        ),
+        child: Align(
+          alignment: Alignment.centerRight,
+          child: InkWell(
+            onTap: () {
+              favoriteController.addFavorite(resto);
+            },
+            child: Obx(
+              () => Image.asset(
+                favoriteController.setFavorite(resto)
+                    ? 'assets/btn_is_favorite_green.png'
+                    : 'assets/btn_favorite.png',
+                width: 40,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     Widget nameCityRating(String name, String city, double rating) {
       return Padding(
         padding: const EdgeInsets.fromLTRB(
           defaultMargin,
-          260,
+          180,
           defaultMargin,
           0,
         ),
@@ -229,7 +255,10 @@ class DetailPage extends StatelessWidget {
       return CustomButton(
         text: 'Tulis Review',
         width: 0.2,
-        onPressed: () => Get.to(() => ReviewPage(), arguments: resto),
+        onPressed: () => Get.toNamed(
+          Routes.reviewPage,
+          arguments: resto,
+        ),
         icon: Icons.reviews,
       );
     }
@@ -285,6 +314,7 @@ class DetailPage extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          favoriteButton(resto),
           nameCityRating(name, city, rating),
           Container(
             width: double.infinity,
@@ -322,41 +352,35 @@ class DetailPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: whiteColor,
       body: GetBuilder<RestoController>(
+        init: restoController,
+        initState: (_) async {
+          await restoController.fetchDetailResto(id);
+        },
         builder: (_) {
-          return FutureBuilder<RestaurantDetail>(
-            future: restoController.fetchDetailResto(id),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (snapshot.hasData) {
-                RestaurantDetail restaurantDetail = snapshot.data!;
+          final restaurantDetail = restoController.restaurantDetail;
 
-                return SingleChildScrollView(
+          return restoController.isLoading == true
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : SingleChildScrollView(
                   child: Stack(
                     children: [
-                      backgroundImage(restaurantDetail.pictureId),
+                      backgroundImage(restaurantDetail!.pictureId),
                       customShadow(),
                       content(
-                          restaurantDetail.name,
-                          restaurantDetail.city,
-                          restaurantDetail.rating,
-                          restaurantDetail.description,
-                          restaurantDetail.menus,
-                          restaurantDetail.categories,
-                          restaurantDetail.customerReviews,
-                          restaurantDetail),
+                        restaurantDetail.name,
+                        restaurantDetail.city,
+                        restaurantDetail.rating,
+                        restaurantDetail.description,
+                        restaurantDetail.menus,
+                        restaurantDetail.categories,
+                        restaurantDetail.customerReviews,
+                        restaurantDetail,
+                      ),
                     ],
                   ),
                 );
-              }
-              return const Center(
-                child: Text('Tidak ada data'),
-              );
-            },
-          );
         },
       ),
     );

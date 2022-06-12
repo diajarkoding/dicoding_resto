@@ -1,7 +1,7 @@
 import 'package:dicoding_resto/data/models/search_resto_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../helper/utils/constans/theme.dart';
+import '../helper/constans/theme.dart';
 import '../pages/detail_page.dart';
 
 class SearchRestoCard extends StatelessWidget {
@@ -28,8 +28,7 @@ class SearchRestoCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
-                image: NetworkImage(
-                    'https://restaurant-api.dicoding.dev/images/medium/${resto.pictureId}'),
+                image: NetworkImage('$imageUrl${resto.pictureId}'),
                 fit: BoxFit.cover,
               ),
             ),

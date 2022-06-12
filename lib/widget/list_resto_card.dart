@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../data/models/resto_model.dart';
-import '../helper/utils/constans/theme.dart';
+import '../helper/constans/theme.dart';
 import '../pages/detail_page.dart';
 
 class ListRestoCard extends StatelessWidget {
@@ -29,8 +28,7 @@ class ListRestoCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
-                image: NetworkImage(
-                    'https://restaurant-api.dicoding.dev/images/medium/${resto.pictureId}'),
+                image: NetworkImage('$imageUrl${resto.pictureId}'),
                 fit: BoxFit.cover,
               ),
             ),

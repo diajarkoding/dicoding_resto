@@ -2,27 +2,38 @@ import 'dart:convert';
 import 'package:dicoding_resto/data/api/api.dart';
 import 'package:dicoding_resto/data/models/detail_resto_model.dart';
 import 'package:dicoding_resto/data/models/search_resto_model.dart';
+import 'package:dicoding_resto/helper/routes/route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../data/models/resto_model.dart';
 import '../data/models/review_resto_model.dart';
-import '../pages/search_page.dart';
 
 class RestoController extends GetxController {
-  final TextEditingController searchEditingController =
-      TextEditingController(text: '');
+  final TextEditingController _nameCustomer = TextEditingController(text: '');
 
-  final TextEditingController nameCustomer = TextEditingController(text: '');
+  TextEditingController get nameCustomer => _nameCustomer;
 
-  final TextEditingController reviewCustomer = TextEditingController(text: '');
+  final TextEditingController _reviewCustomer = TextEditingController(text: '');
 
-  Api api = Api();
+  TextEditingController get reviewCustomer => _reviewCustomer;
 
-  bool isLoading = false;
+  final Api _api = Api();
 
-  List<RestaurantSummary> listResto = [];
+  bool _isLoading = false;
 
-  List<SearchRestoModel> searchListResto = [];
+  bool get isLoading => _isLoading;
+
+  final List<RestaurantSummary> _listResto = [];
+
+  List<RestaurantSummary> get listResto => _listResto;
+
+  List<SearchRestoModel> _searchListResto = [];
+
+  List<SearchRestoModel> get searchListResto => _searchListResto;
+
+  RestaurantDetail? _restaurantDetail;
+
+  RestaurantDetail? get restaurantDetail => _restaurantDetail;
 
   void infoMessage(String massage) {
     Get.snackbar('Info', massage);
@@ -30,9 +41,9 @@ class RestoController extends GetxController {
 
   Future<void> fetchListResto() async {
     try {
-      isLoading = true;
+      _isLoading = true;
 
-      Restaurants snapshot = await api.getListResto();
+      Restaurants snapshot = await _api.getListResto();
 
       List<RestaurantSummary> data = snapshot.restaurants;
 
@@ -43,7 +54,7 @@ class RestoController extends GetxController {
         update();
       }
 
-      isLoading = false;
+      _isLoading = false;
     } catch (e) {
       infoMessage('Tidak ada internet');
     }
@@ -51,17 +62,17 @@ class RestoController extends GetxController {
 
   Future<void> fetchSearchListResto(String query) async {
     try {
-      isLoading = true;
+      _isLoading = true;
 
       if (query.isEmpty) {
         infoMessage('Kata kunci tidak boleh kosong');
       } else {
-        SearchResto snapshot = await api.getSearchListResto(query);
+        SearchResto snapshot = await _api.getSearchListResto(query);
 
         List<SearchRestoModel> data = snapshot.searchRestoModel;
 
         if (data.isNotEmpty) {
-          searchListResto = data;
+          _searchListResto = data;
           update();
         }
 
@@ -72,17 +83,23 @@ class RestoController extends GetxController {
         }
       }
 
-      isLoading = false;
+      _isLoading = false;
     } catch (e) {
       infoMessage('Tidak ada internet');
     }
   }
 
-  Future<RestaurantDetail> fetchDetailResto(String id) async {
+  Future<void> fetchDetailResto(String id) async {
     try {
-      RestaurantDetail snapshot = await api.getDetailResto(id);
+      _isLoading = true;
 
-      return snapshot;
+      RestaurantDetail snapshot = await _api.getDetailResto(id);
+
+      _restaurantDetail = snapshot;
+
+      update();
+
+      _isLoading = false;
     } catch (e) {
       infoMessage('Tidak ada internet');
       rethrow;
@@ -92,11 +109,15 @@ class RestoController extends GetxController {
   Future<dynamic> addRestaurantReview(String id) async {
     try {
       String body = jsonEncode(
-        {"id": id, "name": nameCustomer.text, "review": reviewCustomer.text},
+        {
+          "id": id,
+          "name": nameCustomer.text,
+          "review": reviewCustomer.text,
+        },
       );
 
       final ReviewRestoModel addRestaurantReview =
-          await api.postAddReviewResto(body);
+          await _api.postAddReviewResto(body);
 
       return addRestaurantReview;
     } catch (e) {
@@ -107,11 +128,9 @@ class RestoController extends GetxController {
   void goToSearchPage() {
     searchListResto.clear();
 
-    searchEditingController.clear();
-
     update();
 
-    Get.to(() => SearchPage());
+    Get.toNamed(Routes.searchPage);
   }
 
   Future<void> sendReview(String id) async {

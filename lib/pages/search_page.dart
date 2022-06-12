@@ -1,7 +1,7 @@
 import 'package:dicoding_resto/controller/resto_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../helper/utils/constans/theme.dart';
+import '../helper/constans/theme.dart';
 import '../widget/search_resto_card.dart';
 
 class SearchPage extends StatelessWidget {
@@ -80,7 +80,6 @@ class SearchPage extends StatelessWidget {
             ),
             Expanded(
               child: TextFormField(
-                controller: restoController.searchEditingController,
                 onFieldSubmitted: (String? query) =>
                     restoController.fetchSearchListResto(query!),
                 decoration: InputDecoration.collapsed(
@@ -161,6 +160,7 @@ class SearchPage extends StatelessWidget {
     }
 
     return Scaffold(
+      backgroundColor: whiteColor,
       body: ListView(
         children: [
           header(),
