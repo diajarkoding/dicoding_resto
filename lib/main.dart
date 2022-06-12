@@ -1,25 +1,38 @@
 import 'dart:io';
-import 'package:dicoding_resto/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'utils/certificate.dart';
+import 'package:get/get.dart';
+import 'controller/controll_controller.dart';
+import 'controller/resto_controller.dart';
+import 'helper/routes/app_page.dart';
+import 'helper/routes/route_name.dart';
+import 'helper/utils/certificate.dart';
 
-void main() {
+void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
   HttpOverrides.global = MyHttpOverrides();
-  runApp(const MyApp());
+
+  runApp(MyApp());
+
   FlutterNativeSplash.remove();
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+
+  final controllController = Get.put(ControllController());
+
+  final restoController = Get.put(RestoController());
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      getPages: AppPages.routes,
+      initialRoute: Routes.homePage,
     );
   }
 }

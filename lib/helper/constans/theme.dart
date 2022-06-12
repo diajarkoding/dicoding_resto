@@ -18,3 +18,5 @@ const FontWeight semiBold = FontWeight.w600;
 const FontWeight bold = FontWeight.w700;
 
 const double defaultMargin = 20.0;
+
+const String imageUrl = 'https://restaurant-api.dicoding.dev/images/medium/';

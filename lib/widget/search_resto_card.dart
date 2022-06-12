@@ -1,13 +1,13 @@
-import 'package:dicoding_resto/pages/detail_page.dart';
-import 'package:dicoding_resto/utils/theme.dart';
+import 'package:dicoding_resto/data/models/search_resto_model.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../helper/constans/theme.dart';
+import '../pages/detail_page.dart';
 
-import '../data/resto_model.dart';
+class SearchRestoCard extends StatelessWidget {
+  final SearchRestoModel resto;
 
-class RestoCard extends StatelessWidget {
-  final RestaurantElement resto;
-
-  const RestoCard({
+  const SearchRestoCard({
     Key? key,
     required this.resto,
   }) : super(key: key);
@@ -16,11 +16,8 @@ class RestoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => DetailPage(resto: resto),
-          ),
+        Get.to(
+          () => DetailPage(id: resto.id),
         );
       },
       child: Column(
@@ -31,7 +28,7 @@ class RestoCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
-                image: NetworkImage(resto.pictureId),
+                image: NetworkImage('$imageUrl${resto.pictureId}'),
                 fit: BoxFit.cover,
               ),
             ),
