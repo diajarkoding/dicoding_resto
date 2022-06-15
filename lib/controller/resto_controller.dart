@@ -7,8 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../data/models/resto_model.dart';
 import '../data/models/review_resto_model.dart';
+import '../helper/notification/notification_helper.dart';
 
 class RestoController extends GetxController {
+  final NotificationHelper _notificationHelper = NotificationHelper();
+
   final TextEditingController _nameCustomer = TextEditingController(text: '');
 
   TextEditingController get nameCustomer => _nameCustomer;
@@ -155,5 +158,12 @@ class RestoController extends GetxController {
   void onInit() {
     super.onInit();
     fetchListResto();
+    _notificationHelper.configureSelectNotificationSubject();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    selectNotificationSubject.close();
   }
 }

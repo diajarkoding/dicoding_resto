@@ -27,14 +27,20 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  android_alarm_manager_plus: ^2.0.5
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  flutter_local_notifications: ^9.6.0
   flutter_native_splash: ^2.2.1
   get: ^4.6.5
+  get_storage: ^2.0.3
   google_fonts: ^3.0.1
   http: ^0.13.4
+  intl: ^0.17.0
+  mockito: ^5.2.0
   path_provider: ^2.0.11
+  rxdart: ^0.27.4
   sqflite: ^2.0.2+1
 
 dev_dependencies:

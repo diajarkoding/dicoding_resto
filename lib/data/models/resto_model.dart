@@ -3,7 +3,7 @@ class Restaurants {
     required this.restaurants,
   });
 
-  List<RestaurantSummary> restaurants;
+  final List<RestaurantSummary> restaurants;
 
   factory Restaurants.fromJson(Map<String, dynamic> json) => Restaurants(
         restaurants: List<RestaurantSummary>.from(
@@ -25,12 +25,12 @@ class RestaurantSummary {
     required this.rating,
   });
 
-  String id;
-  String name;
-  String description;
-  String pictureId;
-  String city;
-  double rating;
+  final String id;
+  final String name;
+  final String description;
+  final String pictureId;
+  final String city;
+  final double rating;
 
   factory RestaurantSummary.fromJson(Map<String, dynamic> json) =>
       RestaurantSummary(

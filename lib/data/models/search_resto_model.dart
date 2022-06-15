@@ -4,8 +4,8 @@ class SearchResto {
     required this.searchRestoModel,
   });
 
-  int founded;
-  List<SearchRestoModel> searchRestoModel;
+  final int founded;
+  final List<SearchRestoModel> searchRestoModel;
 
   factory SearchResto.fromJson(Map<String, dynamic> json) => SearchResto(
         founded: json["founded"],
@@ -30,12 +30,12 @@ class SearchRestoModel {
     required this.rating,
   });
 
-  String id;
-  String name;
-  String description;
-  String pictureId;
-  String city;
-  double rating;
+  final String id;
+  final String name;
+  final String description;
+  final String pictureId;
+  final String city;
+  final double rating;
 
   factory SearchRestoModel.fromJson(Map<String, dynamic> json) =>
       SearchRestoModel(

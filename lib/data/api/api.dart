@@ -6,10 +6,10 @@ import '../models/resto_model.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
-  final String baseUrl = 'https://restaurant-api.dicoding.dev';
+  final String _baseUrl = 'https://restaurant-api.dicoding.dev';
 
   Future<Restaurants> getListResto() async {
-    final Uri url = Uri.parse('$baseUrl/list');
+    final Uri url = Uri.parse('$_baseUrl/list');
 
     final http.Response response = await http.get(url);
 
@@ -23,9 +23,9 @@ class Api {
   }
 
   Future<SearchResto> getSearchListResto(String query) async {
-    Uri uri = Uri.parse('$baseUrl/search?q=$query');
+    Uri url = Uri.parse('$_baseUrl/search?q=$query');
 
-    final http.Response response = await http.get(uri);
+    final http.Response response = await http.get(url);
 
     if (response.statusCode == 200) {
       var data = SearchResto.fromJson(jsonDecode(response.body));
@@ -37,7 +37,7 @@ class Api {
   }
 
   Future<RestaurantDetail> getDetailResto(String id) async {
-    final Uri url = Uri.parse('$baseUrl/detail/$id');
+    final Uri url = Uri.parse('$_baseUrl/detail/$id');
 
     final http.Response response = await http.get(url);
 
@@ -54,7 +54,7 @@ class Api {
   }
 
   Future<ReviewRestoModel> postAddReviewResto(String body) async {
-    final Uri url = Uri.parse('$baseUrl/review');
+    final Uri url = Uri.parse('$_baseUrl/review');
 
     var headers = {'Content-Type': 'application/json'};
 

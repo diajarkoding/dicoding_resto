@@ -3,7 +3,7 @@ class RestaurantModel {
     required this.restaurant,
   });
 
-  RestaurantDetail restaurant;
+  final RestaurantDetail restaurant;
 
   factory RestaurantModel.fromJson(Map<String, dynamic> json) =>
       RestaurantModel(
@@ -29,16 +29,16 @@ class RestaurantDetail {
     required this.customerReviews,
   });
 
-  String id;
-  String name;
-  String description;
-  String city;
-  String address;
-  String pictureId;
-  List<Category> categories;
-  Menus menus;
-  double rating;
-  List<CustomerReviewResult> customerReviews;
+  final String id;
+  final String name;
+  final String description;
+  final String city;
+  final String address;
+  final String pictureId;
+  final List<Category> categories;
+  final Menus menus;
+  final double rating;
+  final List<CustomerReviewResult> customerReviews;
 
   factory RestaurantDetail.fromJson(Map<String, dynamic> json) =>
       RestaurantDetail(
@@ -76,7 +76,7 @@ class Category {
     required this.name,
   });
 
-  String name;
+  final String name;
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
         name: json["name"],
@@ -94,9 +94,9 @@ class CustomerReviewResult {
     required this.date,
   });
 
-  String name;
-  String review;
-  String date;
+  final String name;
+  final String review;
+  final String date;
 
   factory CustomerReviewResult.fromJson(Map<String, dynamic> json) =>
       CustomerReviewResult(
@@ -118,8 +118,8 @@ class Menus {
     required this.drinks,
   });
 
-  List<Category> foods;
-  List<Category> drinks;
+  final List<Category> foods;
+  final List<Category> drinks;
 
   factory Menus.fromJson(Map<String, dynamic> json) => Menus(
         foods:

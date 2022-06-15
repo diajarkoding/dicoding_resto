@@ -3,7 +3,7 @@ class ReviewRestoModel {
     required this.customerReviews,
   });
 
-  List<CustomerReview> customerReviews;
+  final List<CustomerReview> customerReviews;
 
   factory ReviewRestoModel.fromJson(Map<String, dynamic> json) =>
       ReviewRestoModel(
@@ -24,9 +24,9 @@ class CustomerReview {
     required this.date,
   });
 
-  String name;
-  String review;
-  String date;
+  final String name;
+  final String review;
+  final String date;
 
   factory CustomerReview.fromJson(Map<String, dynamic> json) => CustomerReview(
         name: json["name"],

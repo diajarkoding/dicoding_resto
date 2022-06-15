@@ -5,8 +5,13 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class DatabaseHelper {
-  DatabaseHelper._private();
-  static DatabaseHelper instance = DatabaseHelper._private();
+  static DatabaseHelper? _instance;
+
+  DatabaseHelper._internal() {
+    _instance = this;
+  }
+
+  factory DatabaseHelper() => _instance ?? DatabaseHelper._internal();
 
   static Database? _database;
 
@@ -47,7 +52,7 @@ class DatabaseHelper {
   }
 
   Future closeDb() async {
-    _database = await instance.database;
+    _database = await _instance!.database;
     _database!.close();
   }
 }

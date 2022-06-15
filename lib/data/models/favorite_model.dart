@@ -8,12 +8,12 @@ class FavoriteModel {
     required this.rating,
   });
 
-  String id;
-  String name;
-  String description;
-  String pictureId;
-  String city;
-  double rating;
+  final String id;
+  final String name;
+  final String description;
+  final String pictureId;
+  final String city;
+  final double rating;
 
   factory FavoriteModel.fromJson(Map<String, dynamic> json) => FavoriteModel(
         id: json["id"],

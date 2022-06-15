@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:sqflite/sqflite.dart';
 
 class FavoriteController extends GetxController {
-  final DatabaseHelper _db = DatabaseHelper.instance;
+  final DatabaseHelper _db = DatabaseHelper();
 
   final String _tableName = 'favorite';
 
