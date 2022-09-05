@@ -133,11 +133,16 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: whiteColor,
-      body: ListView(
-        children: [
-          header(),
-          gridViewResto(),
-        ],
+      body: RefreshIndicator(
+        onRefresh: () async {
+          return await restoController.fetchListResto();
+        },
+        child: ListView(
+          children: [
+            header(),
+            gridViewResto(),
+          ],
+        ),
       ),
       bottomNavigationBar: CustomBottomNavBarItem(),
     );
