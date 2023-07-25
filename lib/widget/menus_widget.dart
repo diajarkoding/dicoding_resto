@@ -1,9 +1,9 @@
 import 'package:dicoding_resto/utils/theme.dart';
 import 'package:flutter/material.dart';
 
-class FoodsAndDrinks extends StatelessWidget {
+class MenusWidget extends StatelessWidget {
   final String text;
-  const FoodsAndDrinks({required this.text, Key? key}) : super(key: key);
+  const MenusWidget({required this.text, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
